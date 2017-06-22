@@ -1,0 +1,20 @@
+{% extends "playground/base.html" %}
+
+{% block content %}
+<form method="post">
+ {% csrf_token %}
+ {{ form.as_table }}
+ <button>Submit</button>
+</form>
+
+{% if sql %}
+<pre>
+{{ sql }}
+</pre>
+{% elif error %}
+<p>There was an error evaluating your request:</p>
+<pre>
+{{ error }}
+</pre>
+{% endif %}
+{% endblock %}
