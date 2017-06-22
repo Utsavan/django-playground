@@ -1,0 +1,5 @@
+machine:
+  python:
+    version: 3.6.1
+  environment:
+    DJANGO_SECRET_KEY: test
