@@ -1,11 +1,34 @@
 {% extends "playground/base.html" %}
 
 {% block content %}
+<div style="display: flex; justify-content: space-between;">
+<div>
 <form method="post">
  {% csrf_token %}
  {{ form.as_table }}
  <button>Submit</button>
 </form>
+</div>
+<div>
+<p>Try the following as an example:</p>
+<p>Models:
+<pre id="model-example">
+from django.db import models
+
+class Foo(models.Model):
+    from django.db import models
+    bar = models.CharField(max_length=255)
+</pre>
+<button onclick="document.getElementById('id_model_def').value = document.getElementById('model-example').innerText">Use</button>
+</p>
+<p>Query:
+<pre id="query-example">
+Foo.objects.filter(bar="bar").order_by("bar")
+</pre>
+<button onclick="document.getElementById('id_query').value = document.getElementById('query-example').innerText">Use</button>
+</p>
+</div>
+</div>
 
 {% if sql %}
 <pre>
