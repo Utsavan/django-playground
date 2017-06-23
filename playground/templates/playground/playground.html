@@ -7,6 +7,17 @@
  {{ form.as_table }}
  <button>Submit</button>
 </form>
+{% if sql %}
+<p>Resulting SQL:</p>
+<pre>
+{{ sql }}
+</pre>
+{% elif error %}
+<p>There was an error evaluating your request:</p>
+<pre>
+{{ error }}
+</pre>
+{% endif %}
 </div>
 <div>
 <p>Try the following as an example:</p>
@@ -28,15 +39,4 @@ Foo.objects.filter(bar="bar").order_by("bar")
 </p>
 </div>
 </div>
-
-{% if sql %}
-<pre>
-{{ sql }}
-</pre>
-{% elif error %}
-<p>There was an error evaluating your request:</p>
-<pre>
-{{ error }}
-</pre>
-{% endif %}
 {% endblock %}
