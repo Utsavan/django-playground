@@ -1,6 +1,7 @@
 # from io import StringIO
 # from traceback import print_tb
 
+import sqlparse
 from django import forms
 from django.shortcuts import render
 
@@ -20,7 +21,7 @@ def index(request):
                 qs = run_query(form.cleaned_data.get('model_def'), form.cleaned_data.get('query'))
                 context = {
                     'form': form,
-                    'sql': str(qs.query),
+                    'sql': sqlparse.format(str(qs.query), reindent=True),
                 }
             except Exception as e:
                 # output = StringIO()
