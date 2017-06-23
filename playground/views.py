@@ -20,7 +20,7 @@ def index(request):
                 qs = run_query(form.cleaned_data.get('model_def'), form.cleaned_data.get('query'))
                 context = {
                     'form': form,
-                    'sql': qs.query,
+                    'sql': str(qs.query),
                 }
             except Exception as e:
                 # output = StringIO()
