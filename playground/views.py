@@ -14,8 +14,8 @@ class PlaygroundForm(forms.Form):
 
 
 def index(request):
-    if request.method == 'POST':
-        form = PlaygroundForm(request.POST)
+    if 'model_def' in request.GET:
+        form = PlaygroundForm(request.GET)
         if form.is_valid():
             try:
                 qs = run_query(form.cleaned_data.get('model_def'), form.cleaned_data.get('query'))
