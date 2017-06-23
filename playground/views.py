@@ -10,7 +10,7 @@ from .run_query import run_query
 
 class PlaygroundForm(forms.Form):
     model_def = forms.CharField(widget=forms.Textarea)
-    query = forms.CharField(widget=forms.Textarea)
+    query = forms.CharField()
 
 
 def index(request):

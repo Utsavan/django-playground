@@ -3,6 +3,11 @@
 {% block content %}
 <div style="display: flex; justify-content: space-between;">
 <div>
+<style>
+#id_query {
+ width: 300px;
+}
+</style>
 <form method="get">
  {{ form.as_table }}
  <button>Submit</button>
