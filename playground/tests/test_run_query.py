@@ -51,6 +51,10 @@ class Foo(models.Model):
         qs = run_query(self.model_def, 'Foo.objects.filter(bar="bar1") | Foo.objects.filter(bar="bar2")')
         self.assertEqual(str(qs.query), 'SELECT "playground_foo"."id", "playground_foo"."bar" FROM "playground_foo" WHERE ("playground_foo"."bar" = bar1 OR "playground_foo"."bar" = bar2)')
 
+    def test_run_query__qs_union_multiple(self):
+        qs = run_query(self.model_def, 'Foo.objects.filter(bar="bar1") | Foo.objects.filter(bar="bar2") | Foo.objects.filter(bar="bar3")')
+        self.assertEqual(str(qs.query), 'SELECT "playground_foo"."id", "playground_foo"."bar" FROM "playground_foo" WHERE ("playground_foo"."bar" = bar1 OR "playground_foo"."bar" = bar2 OR "playground_foo"."bar" = bar3)')
+
 #    def test_run_query__count(self):
 #        qs = run_query(self.model_def, 'Foo.objects.count()')
 #        print(qs.query)
