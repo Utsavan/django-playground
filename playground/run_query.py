@@ -74,24 +74,26 @@ def run_query(model_def, query):
     local_data.collected_model_names = []
     exec(compile(extract_safe_orm_ast(model_def), filename='<ast>', mode='exec'))
 
-    loader = MigrationLoader(None, ignore_no_migrations=True)
-    to_state = ProjectState.from_apps(apps)
-
-    autodetector = MigrationAutodetector(
-        from_state=loader.project_state(),
-        to_state=to_state,
-        questioner=NonInteractiveMigrationQuestioner('playground'),
-    )
-    changes = autodetector.changes(
-        graph=loader.graph,
-        trim_to_apps={'playground'},
-        convert_apps={'playground'},
-    )
-
-    connection = connections[DEFAULT_DB_ALIAS]
-    migration = changes['playground'][0]
-
-    with connection.schema_editor(atomic=migration.atomic) as schema_editor:
-        migration.apply(project_state=to_state, schema_editor=schema_editor)
+# these migrations may not be needed afterall
+#
+#    loader = MigrationLoader(None, ignore_no_migrations=True)
+#    to_state = ProjectState.from_apps(apps)
+#
+#    autodetector = MigrationAutodetector(
+#        from_state=loader.project_state(),
+#        to_state=to_state,
+#        questioner=NonInteractiveMigrationQuestioner('playground'),
+#    )
+#    changes = autodetector.changes(
+#        graph=loader.graph,
+#        trim_to_apps={'playground'},
+#        convert_apps={'playground'},
+#    )
+#
+#    connection = connections[DEFAULT_DB_ALIAS]
+#    migration = changes['playground'][0]
+#
+#    with connection.schema_editor(atomic=migration.atomic) as schema_editor:
+#        migration.apply(project_state=to_state, schema_editor=schema_editor)
 
     return eval(compile(extract_safe_orm_query_ast(query), filename='<ast>', mode='eval'))
